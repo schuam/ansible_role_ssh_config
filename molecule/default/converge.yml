@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include schuam.ssh_config"
+      include_role:
+        name: "schuam.ssh_config"
