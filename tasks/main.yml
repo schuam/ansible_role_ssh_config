@@ -1,2 +1,6 @@
 ---
-# tasks file for ssh_config
+- name: Include OS-specific variables.
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include SSH task
+  ansible.builtin.include_tasks: ssh.yml

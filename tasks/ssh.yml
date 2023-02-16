@@ -1,0 +1,32 @@
+---
+- name: Make sure SSH is in the correct state.
+  ansible.builtin.service:
+    name: "{{ sshd_name }}"
+    enabled: "{{ sshd_enabled }}"
+    state: "{{ sshd_state }}"
+
+- name: Configure SSH.
+  ansible.builtin.lineinfile:
+    create: false
+    path: "{{ sshd_config_path }}"
+    regex: "{{ item.regex }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+    validate: 'sshd -T -f %s'
+  with_items:
+    - regex: "^#?Port"
+      line: "Port {{ ssh_port }}"
+    - regex: "^#?PermitRootLogin"
+      line: "PermitRootLogin {{ ssh_permit_root_login }}"
+    - regex: "^#?PubkeyAuthentication"
+      line: "PubkeyAuthentication {{ ssh_public_key_authentication }}"
+    - regex: "^#?PasswordAuthentication"
+      line: "PasswordAuthentication {{ ssh_password_authentication }}"
+    - regex: "^#?PermitEmptyPasswords"
+      line: "PermitEmptyPasswords {{ ssh_permit_empty_passwords }}"
+    - regex: "^#?AllowAgentForwarding"
+      line: "AllowAgentForwarding {{ ssh_allow_agent_forwarding }}"
+    - regex: "^#?X11Forwarding"
+      line: "X11Forwarding {{ ssh_x11_forwarding }}"
+  notify: Restart_sshd

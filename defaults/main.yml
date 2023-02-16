@@ -1,2 +1,13 @@
 ---
 # defaults file for ssh_config
+ssh_port: 22
+ssh_permit_root_login: "no"
+ssh_public_key_authentication: "yes"
+ssh_password_authentication: "no"
+ssh_permit_empty_passwords: "no"
+ssh_allow_agent_forwarding: "yes"
+ssh_x11_forwarding: "no"
+
+sshd_enabled: true
+sshd_state: "started"
+sshd_restarted_handler_state: "started"
