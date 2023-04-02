@@ -12,7 +12,7 @@
     regex: "{{ item.regex }}"
     line: "{{ item.line }}"
     state: present
-    mode: 0644
+    mode: "0644"
     validate: 'sshd -T -f %s'
   with_items:
     - regex: "^#?Port"
