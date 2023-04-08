@@ -2,6 +2,11 @@
 
 This role configures SSH on an Ubuntu or Arch Linux system.
 
+**Note**: If you run this role with the defaul variables (see section "Role
+Variable"), you will disable password authentication. Make sure you have a
+functioning ssh key copied to the host(s) that you are running this role
+against. Otherwise you might look yourself out of that system.
+
 
 ## Requirements
 
