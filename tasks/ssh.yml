@@ -4,6 +4,7 @@
     name: "{{ sshd_name }}"
     enabled: "{{ sshd_enabled }}"
     state: "{{ sshd_state }}"
+    become: true
 
 - name: Configure SSH.
   ansible.builtin.lineinfile:
@@ -14,6 +15,7 @@
     state: present
     mode: "0644"
     validate: 'sshd -T -f %s'
+    become: true
   with_items:
     - regex: "^#?Port"
       line: "Port {{ ssh_port }}"
